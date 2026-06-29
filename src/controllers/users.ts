@@ -9,7 +9,7 @@ export default {
       const { email, name } = request.body;
 
       if (!email) {
-        return response.status(400).json("Dados do usuário incompletos");
+        return response.status(400).json("User data incomplete");
       }
 
       const user = await prisma.user.create({
