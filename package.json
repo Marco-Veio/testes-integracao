@@ -7,21 +7,27 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "pretest": "dotenv -e .env.test -- prisma migrate deploy",
+    "test": "dotenv -e .env.test -- tsx --test --test-concurrency=1",
     "dev": "tsx watch --include ./**/* src/index.ts",
-    "migrate": "prisma migrate deploy"
+    "migrate": "npx prisma migrate deploy"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.5.0",
     "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "supertest": "^7.2.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.0.1",
+    "@types/supertest": "^7.2.0",
+    "dotenv-cli": "^11.0.0",
     "prisma": "^7.8.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"

@@ -9,7 +9,7 @@ export default {
       const { email, name } = request.body;
 
       if (!email) {
-        return response.status(400).json("Dados do usuário incompletos");
+        return response.status(400).json("User data incomplete");
       }
 
       const user = await prisma.user.create({
@@ -36,11 +36,17 @@ export default {
   getById: async (request: Request, response: Response) => {
     try {
       const { id } = request.params;
+
       const user = await prisma.user.findUnique({
         where: {
           id: +id,
         },
       });
+
+      if (!user) {
+        return response.status(404).json("User not found");
+      }
+
       return response.status(200).json(user);
     } catch (e) {
       return handleErrors(e, response);
